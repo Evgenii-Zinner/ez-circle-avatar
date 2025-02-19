@@ -1,20 +1,69 @@
 import 'package:flutter/material.dart';
 
 class EzCircleAvatar extends StatelessWidget {
+  /// The name of the avatar, used to generate initials and a default background color.
   final String name;
+
+  /// The background color of the circle.
+  final Color? backgroundColor;
+
+  /// The foreground color of the circle.
+  final Color? foregroundColor;
+
+  /// The child of the circle.
+  final Widget? child;
+
+  /// The radius of the circle.
+  final double? radius;
+
+  /// The maximum radius of the circle.
+  final double? maxRadius;
+
+  /// The minimum radius of the circle.
+  final double? minRadius;
+
+  /// The background image of the circle.
+  final ImageProvider<Object>? backgroundImage;
+
+  /// The foreground image of the circle.
+  final ImageProvider<Object>? foregroundImage;
+
+  /// Called when an error occurs loading the background image.
+  final ImageErrorListener? onBackgroundImageError;
+
+  /// Called when an error occurs loading the foreground image.
+  final ImageErrorListener? onForegroundImageError;
 
   const EzCircleAvatar({
     super.key,
     required this.name,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.backgroundImage,
+    this.foregroundImage,
+    this.child,
+    this.radius,
+    this.maxRadius,
+    this.minRadius,
+    this.onBackgroundImageError,
+    this.onForegroundImageError,
   });
 
   @override
   Widget build(BuildContext context) {
     final initials = EzAvatarHelper.getInitials(name);
     return CircleAvatar(
-      backgroundColor: EzAvatarHelper.stringToColor(name),
-      child: initials.isEmpty ? EzAvatarHelper.defaultIcon : Text(initials),
-    );
+        backgroundColor: backgroundColor ?? EzAvatarHelper.stringToColor(name),
+        foregroundColor: foregroundColor,
+        radius: radius,
+        maxRadius: maxRadius,
+        minRadius: minRadius,
+        backgroundImage: backgroundImage,
+        foregroundImage: foregroundImage,
+        onBackgroundImageError: onBackgroundImageError,
+        onForegroundImageError: onForegroundImageError,
+        child: child ??
+            (initials.isEmpty ? EzAvatarHelper.defaultIcon : Text(initials)));
   }
 }
 

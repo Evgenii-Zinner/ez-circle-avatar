@@ -1,11 +1,13 @@
 name: ez_circle_avatar
-description: "A simple Flutter widget for displaying circular avatars with initials and a consistent, 
-automatically generated background color based on a name."
+description: A simple Flutter package for creating circular avatars.
 version: 0.0.1
+homepage: https://github.com/Evgenii-Zinner/ez-circle-avatar
 repository: https://github.com/Evgenii-Zinner/ez-circle-avatar
+issue_tracker: https://github.com/Evgenii-Zinner/ez-circle-avatar/issues
+
 
 environment:
-  sdk: ^3.6.1
+  sdk: '>=3.0.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
@@ -15,7 +17,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

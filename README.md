@@ -32,11 +32,19 @@ Perfect for quick integration when you need a basic avatar without extensive cus
 Displaying a basic avatar is as simple as this:
 
 ```dart
-EzCircleAvatar(name: 'Jane Doe'), // Different name, different color
-EzCircleAvatar(name: 'John'),      // Handles single names
-EzCircleAvatar(name: 'John David Doe'), // Handles multiple names
-EzCircleAvatar(name: ''), // Handles empty name, will show a person_outline icon
+EzCircleAvatar(name: 'Jane Doe') // Different name, different color
+EzCircleAvatar(name: 'John')      // Handles single names
+EzCircleAvatar(name: 'John David Doe') // Handles multiple names
+EzCircleAvatar(name: '') // Handles empty name, will show a person_outline icon
+EzCircleAvatar(name: 'Jane Doe',radius: 24,)
+EzCircleAvatar(name: 'John', backgroundColor: Colors.deepPurple)
+EzCircleAvatar(name: 'John David Doe',backgroundImage: AssetImage('images/image.png'))
+EzCircleAvatar(name: '', child: Icon(Icons.person, color: Colors.white, size: 20)),)
 ```
+
+And the result will be like this:
+
+![Showcase of ez_circle_avatar](https://raw.githubusercontent.com/Evgenii-Zinner/ez_circle_avatar/main/images/ez_circle_avatar_showcase.png)
 
 ## Maintainer
 

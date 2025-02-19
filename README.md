@@ -44,7 +44,7 @@ EzCircleAvatar(name: '', child: Icon(Icons.person, color: Colors.white, size: 20
 
 And the result will be like this:
 
-![Showcase of ez_circle_avatar](https://raw.githubusercontent.com/Evgenii-Zinner/ez_circle_avatar/main/images/ez_circle_avatar_showcase.png)
+![Showcase of ez_circle_avatar](https://github.com/Evgenii-Zinner/ez-circle-avatar/blob/63353fe9b559bf4e7f63f8566c838fe442c58295/images/ez_circle_avatar_showcase.png)
 
 ## Maintainer
 

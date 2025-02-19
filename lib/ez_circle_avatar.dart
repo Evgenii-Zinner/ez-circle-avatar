@@ -1,6 +1,29 @@
 import 'package:flutter/material.dart';
 
+/// {@template ez_circle_avatar}
+/// A widget that displays a circular avatar with initials or an icon.
+///
+/// The avatar can display initials derived from a name, a custom child,
+/// a background image, or a foreground image. It also supports custom
+/// background and foreground colors, as well as custom radius.
+/// {@endtemplate}
 class EzCircleAvatar extends StatelessWidget {
+  /// {@macro ez_circle_avatar}
+  const EzCircleAvatar({
+    super.key,
+    required this.name,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.backgroundImage,
+    this.foregroundImage,
+    this.child,
+    this.radius,
+    this.maxRadius,
+    this.minRadius,
+    this.onBackgroundImageError,
+    this.onForegroundImageError,
+  });
+
   /// The name of the avatar, used to generate initials and a default background color.
   final String name;
 
@@ -34,26 +57,11 @@ class EzCircleAvatar extends StatelessWidget {
   /// Called when an error occurs loading the foreground image.
   final ImageErrorListener? onForegroundImageError;
 
-  const EzCircleAvatar({
-    super.key,
-    required this.name,
-    this.backgroundColor,
-    this.foregroundColor,
-    this.backgroundImage,
-    this.foregroundImage,
-    this.child,
-    this.radius,
-    this.maxRadius,
-    this.minRadius,
-    this.onBackgroundImageError,
-    this.onForegroundImageError,
-  });
-
   @override
   Widget build(BuildContext context) {
-    final initials = EzAvatarHelper.getInitials(name);
+    final initials = _EzAvatarHelper.getInitials(name);
     return CircleAvatar(
-        backgroundColor: backgroundColor ?? EzAvatarHelper.stringToColor(name),
+        backgroundColor: backgroundColor ?? _EzAvatarHelper.stringToColor(name),
         foregroundColor: foregroundColor,
         radius: radius,
         maxRadius: maxRadius,
@@ -63,11 +71,15 @@ class EzCircleAvatar extends StatelessWidget {
         onBackgroundImageError: onBackgroundImageError,
         onForegroundImageError: onForegroundImageError,
         child: child ??
-            (initials.isEmpty ? EzAvatarHelper.defaultIcon : Text(initials)));
+            (initials.isEmpty ? _EzAvatarHelper.defaultIcon : Text(initials)));
   }
 }
 
-class EzAvatarHelper {
+/// A helper class for the [EzCircleAvatar] widget.
+///
+/// This class is used internally by [EzCircleAvatar] to generate initials
+/// and colors.
+class _EzAvatarHelper {
   /// The default icon to use when no initials are available.
   ///
   /// This is used in [EzCircleAvatar] when the input name is empty or null.

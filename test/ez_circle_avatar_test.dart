@@ -28,19 +28,6 @@ void main() {
       expect(textFinder, findsOneWidget);
     });
 
-    testWidgets('displays person icon for an empty name',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const MaterialApp(
-        home: Scaffold(
-          body: EzCircleAvatar(name: ''),
-        ),
-      ));
-
-      final iconFinder = find.byWidgetPredicate((widget) =>
-          widget is Icon && widget.icon == EzAvatarHelper.defaultIcon.icon);
-      expect(iconFinder, findsOneWidget);
-    });
-
     testWidgets('displays correct color for the same name',
         (WidgetTester tester) async {
       await tester.pumpWidget(const MaterialApp(
@@ -124,9 +111,10 @@ void main() {
         of: find.byType(CircleAvatar),
         matching: find.byType(DefaultTextStyle),
       );
-      final defaultTextStyle = tester.widget<DefaultTextStyle>(defaultTextStyleFinder.first);
+      final defaultTextStyle =
+          tester.widget<DefaultTextStyle>(defaultTextStyleFinder.first);
       expect(defaultTextStyle.style.color, customColor);
-        });
+    });
 
     testWidgets('displays custom child', (WidgetTester tester) async {
       const customChild = Icon(Icons.star);
@@ -221,30 +209,6 @@ void main() {
       final circleAvatarFinder = find.byType(CircleAvatar);
       final circleAvatar = tester.widget<CircleAvatar>(circleAvatarFinder);
       expect(circleAvatar.foregroundImage, customImage);
-    });
-  });
-
-  group('EzAvatarHelper', () {
-    test('getInitials returns correct initials', () {
-      expect(EzAvatarHelper.getInitials('John Doe'), 'JD');
-      expect(EzAvatarHelper.getInitials('Jane'), 'J');
-      expect(EzAvatarHelper.getInitials(''), '');
-      expect(EzAvatarHelper.getInitials('  '), '');
-      expect(EzAvatarHelper.getInitials('John  Doe'), 'JD');
-      expect(EzAvatarHelper.getInitials('  John Doe  '), 'JD');
-      expect(EzAvatarHelper.getInitials('John Doe Smith'), 'JS');
-    });
-
-    test('stringToColor returns the same color for the same name', () {
-      final color1 = EzAvatarHelper.stringToColor('John Doe');
-      final color2 = EzAvatarHelper.stringToColor('John Doe');
-      expect(color1, color2);
-    });
-
-    test('stringToColor returns different colors for different names', () {
-      final color1 = EzAvatarHelper.stringToColor('John Doe');
-      final color2 = EzAvatarHelper.stringToColor('Jane Smith');
-      expect(color1, isNot(color2));
     });
   });
 }

@@ -36,10 +36,10 @@ EzCircleAvatar(name: 'Jane Doe') // Different name, different color
 EzCircleAvatar(name: 'John')      // Handles single names
 EzCircleAvatar(name: 'John David Doe') // Handles multiple names
 EzCircleAvatar(name: '') // Handles empty name, will show a person_outline icon
-EzCircleAvatar(name: 'Jane Doe',radius: 24,)
+EzCircleAvatar(name: 'Jane Doe', radius: 24)
 EzCircleAvatar(name: 'John', backgroundColor: Colors.deepPurple)
-EzCircleAvatar(name: 'John David Doe',backgroundImage: AssetImage('images/image.png'))
-EzCircleAvatar(name: '', child: Icon(Icons.person, color: Colors.white, size: 20)),)
+EzCircleAvatar(name: 'John David Doe', backgroundImage: AssetImage('images/image.png'))
+EzCircleAvatar(name: '', child: Icon(Icons.person, color: Colors.white, size: 20)))
 ```
 
 And the result will be like this:

@@ -7,7 +7,7 @@ class EzCircleAvatar extends StatelessWidget {
   /// The background color of the circle.
   final Color? backgroundColor;
 
-  /// The foreground color of the circle.
+  /// The color to use for text in the circle (if no image is provided).
   final Color? foregroundColor;
 
   /// The child of the circle.

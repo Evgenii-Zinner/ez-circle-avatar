@@ -90,6 +90,138 @@ void main() {
 
       expect(color1, isNot(color2));
     });
+
+    testWidgets('displays custom background color',
+        (WidgetTester tester) async {
+      const customColor = Colors.red;
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            backgroundColor: customColor,
+          ),
+        ),
+      ));
+
+      final circleAvatarFinder = find.byType(CircleAvatar);
+      final circleAvatar = tester.widget<CircleAvatar>(circleAvatarFinder);
+      expect(circleAvatar.backgroundColor, customColor);
+    });
+
+    testWidgets('displays custom foreground color',
+        (WidgetTester tester) async {
+      const customColor = Colors.green;
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            foregroundColor: customColor,
+          ),
+        ),
+      ));
+
+      final defaultTextStyleFinder = find.descendant(
+        of: find.byType(CircleAvatar),
+        matching: find.byType(DefaultTextStyle),
+      );
+      final defaultTextStyle = tester.widget<DefaultTextStyle>(defaultTextStyleFinder.first);
+      expect(defaultTextStyle.style.color, customColor);
+        });
+
+    testWidgets('displays custom child', (WidgetTester tester) async {
+      const customChild = Icon(Icons.star);
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            child: customChild,
+          ),
+        ),
+      ));
+
+      final childFinder = find.byWidget(customChild);
+      expect(childFinder, findsOneWidget);
+    });
+
+    testWidgets('displays custom radius', (WidgetTester tester) async {
+      const customRadius = 50.0;
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            radius: customRadius,
+          ),
+        ),
+      ));
+
+      final circleAvatarFinder = find.byType(CircleAvatar);
+      final circleAvatar = tester.widget<CircleAvatar>(circleAvatarFinder);
+      expect(circleAvatar.radius, customRadius);
+    });
+
+    testWidgets('displays custom maxRadius', (WidgetTester tester) async {
+      const customMaxRadius = 60.0;
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            maxRadius: customMaxRadius,
+          ),
+        ),
+      ));
+
+      final circleAvatarFinder = find.byType(CircleAvatar);
+      final circleAvatar = tester.widget<CircleAvatar>(circleAvatarFinder);
+      expect(circleAvatar.maxRadius, customMaxRadius);
+    });
+
+    testWidgets('displays custom minRadius', (WidgetTester tester) async {
+      const customMinRadius = 20.0;
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            minRadius: customMinRadius,
+          ),
+        ),
+      ));
+
+      final circleAvatarFinder = find.byType(CircleAvatar);
+      final circleAvatar = tester.widget<CircleAvatar>(circleAvatarFinder);
+      expect(circleAvatar.minRadius, customMinRadius);
+    });
+
+    testWidgets('displays custom backgroundImage', (WidgetTester tester) async {
+      const customImage = AssetImage('test/image.png');
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            backgroundImage: customImage,
+          ),
+        ),
+      ));
+
+      final circleAvatarFinder = find.byType(CircleAvatar);
+      final circleAvatar = tester.widget<CircleAvatar>(circleAvatarFinder);
+      expect(circleAvatar.backgroundImage, customImage);
+    });
+
+    testWidgets('displays custom foregroundImage', (WidgetTester tester) async {
+      const customImage = AssetImage('test/image.png');
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: EzCircleAvatar(
+            name: 'John Doe',
+            foregroundImage: customImage,
+          ),
+        ),
+      ));
+
+      final circleAvatarFinder = find.byType(CircleAvatar);
+      final circleAvatar = tester.widget<CircleAvatar>(circleAvatarFinder);
+      expect(circleAvatar.foregroundImage, customImage);
+    });
   });
 
   group('EzAvatarHelper', () {
@@ -97,20 +229,19 @@ void main() {
       expect(EzAvatarHelper.getInitials('John Doe'), 'JD');
       expect(EzAvatarHelper.getInitials('Jane'), 'J');
       expect(EzAvatarHelper.getInitials(''), '');
-      expect(EzAvatarHelper.getInitials('   '), '');
-      expect(EzAvatarHelper.getInitials('John Doe Smith'), 'JS');
-    });
-    test('getInitials returns correct initials for three-word name', () {
+      expect(EzAvatarHelper.getInitials('  '), '');
+      expect(EzAvatarHelper.getInitials('John  Doe'), 'JD');
+      expect(EzAvatarHelper.getInitials('  John Doe  '), 'JD');
       expect(EzAvatarHelper.getInitials('John Doe Smith'), 'JS');
     });
 
-    test('stringToColor returns the same color for the same string', () {
+    test('stringToColor returns the same color for the same name', () {
       final color1 = EzAvatarHelper.stringToColor('John Doe');
       final color2 = EzAvatarHelper.stringToColor('John Doe');
       expect(color1, color2);
     });
 
-    test('stringToColor returns different colors for different strings', () {
+    test('stringToColor returns different colors for different names', () {
       final color1 = EzAvatarHelper.stringToColor('John Doe');
       final color2 = EzAvatarHelper.stringToColor('Jane Smith');
       expect(color1, isNot(color2));

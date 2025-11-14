@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// {@template ez_circle_avatar}
 /// A widget that displays a circular avatar with initials or an icon.
 ///
 /// The avatar can display initials derived from a name, a custom child,
 /// a background image, or a foreground image. It also supports custom
 /// background and foreground colors, as well as custom radius.
-/// {@endtemplate}
 class EzCircleAvatar extends StatelessWidget {
-  /// {@macro ez_circle_avatar}
   const EzCircleAvatar({
     super.key,
     required this.name,
@@ -60,9 +57,12 @@ class EzCircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final initials = _EzAvatarHelper.getInitials(name);
+    final bgColor = backgroundColor ?? _EzAvatarHelper.stringToColor(name);
+    final fgColor =
+        foregroundColor ?? _EzAvatarHelper.getContrastingColor(bgColor);
     return CircleAvatar(
-        backgroundColor: backgroundColor ?? _EzAvatarHelper.stringToColor(name),
-        foregroundColor: foregroundColor,
+        backgroundColor: bgColor,
+        foregroundColor: fgColor,
         radius: radius,
         maxRadius: maxRadius,
         minRadius: minRadius,
@@ -75,19 +75,9 @@ class EzCircleAvatar extends StatelessWidget {
   }
 }
 
-/// A helper class for the [EzCircleAvatar] widget.
-///
-/// This class is used internally by [EzCircleAvatar] to generate initials
-/// and colors.
 class _EzAvatarHelper {
-  /// The default icon to use when no initials are available.
-  ///
-  /// This is used in [EzCircleAvatar] when the input name is empty or null.
   static const defaultIcon = Icon(Icons.person_outline);
 
-  /// Converts a string to a color using a hash function.
-  ///
-  /// This method generates a color based on the input string's hash code.
   static Color stringToColor(String str) {
     int hash = 0;
     for (int i = 0; i < str.length; i++) {
@@ -101,13 +91,11 @@ class _EzAvatarHelper {
     return newHslColor.toColor();
   }
 
-  /// Extracts the initials from a given name.
-  ///
-  /// This method takes a name string and returns the initials.
-  /// - If the name is empty, it returns an empty string.
-  /// - If the name has one word, it returns the first letter in uppercase.
-  /// - If the name has multiple words, it returns the first letter of the first
-  ///   and last words in uppercase.
+  static Color getContrastingColor(Color color) {
+    final brightness = ThemeData.estimateBrightnessForColor(color);
+    return brightness == Brightness.dark ? Colors.white : Colors.black;
+  }
+
   static String getInitials(String name) {
     final trimmedName = name.trim();
     if (trimmedName.isEmpty) {

@@ -1,7 +1,25 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# Flutter / Dart
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.idea/
+.packages
 build/
+coverage/
+pubspec.lock
+
+# IDEs
+.idea/
 *.iml
 .metadata

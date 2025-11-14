@@ -1,59 +1,90 @@
 # ez_circle_avatar
 
-A simple Flutter widget for displaying circular avatars with initials and a consistent, 
-automatically generated background color based on a name.  
-Perfect for quick integration when you need a basic avatar without extensive customization.
+A simple Flutter widget for displaying circular avatars with initials, a consistent, automatically generated background color, and a contrasting foreground color.
 
-## Features
+![Showcase of ez_circle_avatar](https://raw.githubusercontent.com/Evgenii-Zinner/ez-circle-avatar/main/images/ez_circle_avatar_showcase.png)
 
-*   **Name-Based Initials & Consistent Colors:** Generates initials and a consistent background color from a given name (handles single, first/last, and multiple names).  The same name always produces the same color.
-*   **Easy to Use:** Just provide the name.
-*   **Default Icon:** Displays a `person_outline` icon when no name is provided.
-*   **Handles Name Variations:** Trims leading/trailing spaces in names.
-*   **Customizable:** Uses the standard Flutter `CircleAvatar` widget, allowing further customization (size, border, etc.).
-*   **Available on pub.dev:** [ez_circle_avatar](https://pub.dev/packages/ez_circle_avatar)
+## ✨ Features
 
-## Getting started
+*   **Automatic Colors:** Generates a consistent background color from a name and automatically selects a contrasting foreground (black or white) for readability.
+*   **Name-Based Initials:** Creates initials from a given name (handles single, first/last, and multiple names).
+*   **Highly Customizable:** Override colors, display images, or provide a custom child widget.
+*   **Easy to Use:** Just provide a name to get a complete avatar.
+*   **Default Icon:** Displays a `person_outline` icon when the name is empty.
 
-1.  Add the dependency:
+## 📦 Installation
 
-    ```bash
-    flutter pub add ez_circle_avatar
-    ```
+Run this command in your terminal:
 
-2.  Import the package:
-
-    ```dart
-    import 'package:ez_circle_avatar/ez_circle_avatar.dart';
-    ```
-
-## Usage
-
-Displaying a basic avatar is as simple as this:
-
-```dart
-EzCircleAvatar(name: 'Jane Doe') // Different name, different color
-EzCircleAvatar(name: 'John')      // Handles single names
-EzCircleAvatar(name: 'John David Doe') // Handles multiple names
-EzCircleAvatar(name: '') // Handles empty name, will show a person_outline icon
-EzCircleAvatar(name: 'Jane Doe', radius: 24)
-EzCircleAvatar(name: 'John', backgroundColor: Colors.deepPurple)
-EzCircleAvatar(name: 'John David Doe', backgroundImage: AssetImage('images/image.png'))
-EzCircleAvatar(name: '', child: Icon(Icons.person, color: Colors.white, size: 20)))
+```shell
+flutter pub add ez_circle_avatar
 ```
 
-And the result will be like this:
+## 🚀 Usage
 
-![Showcase of ez_circle_avatar](https://github.com/Evgenii-Zinner/ez-circle-avatar/blob/63353fe9b559bf4e7f63f8566c838fe442c58295/images/ez_circle_avatar_showcase.png)
+Import the package and use the `EzCircleAvatar` widget.
 
-## Maintainer
+```dart
+import 'package:flutter/material.dart';
+import 'package:ez_circle_avatar/ez_circle_avatar.dart';
 
-*   [Evgenii Zinner](https://github.com/Evgenii-Zinner)
+class AvatarShowcaseScreen extends StatelessWidget {
+  const AvatarShowcaseScreen({super.key});
 
-## Contributing
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('EzCircleAvatar Demo')),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Basic usage
+            EzCircleAvatar(name: 'Jane Doe'),
+            SizedBox(height: 16),
 
-Contributions are welcome! Please feel free to open issues and submit pull requests.
+            // Custom radius and colors
+            EzCircleAvatar(
+              name: 'John',
+              radius: 40,
+              backgroundColor: Colors.deepPurple,
+              foregroundColor: Colors.white,
+            ),
+            SizedBox(height: 16),
 
-## License
+            // With a background image
+            EzCircleAvatar(
+              name: 'John David Doe',
+              backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
-[MIT](LICENSE)
+## 🎨 Customization
+
+Customize the avatar by passing any of the following properties:
+
+| Property                 | Description                                                               |
+| ------------------------ | ------------------------------------------------------------------------- |
+| `name`                   | The string used to generate initials and the default background color.    |
+| `backgroundColor`        | Overrides the automatically generated background color.                   |
+| `foregroundColor`        | Overrides the automatically selected contrasting text color.              |
+| `radius`                 | The radius of the circular avatar.                                        |
+| `backgroundImage`        | An `ImageProvider` for the background of the avatar.                      |
+| `foregroundImage`        | An `ImageProvider` for the foreground of the avatar.                      |
+| `child`                  | A custom widget to display inside the circle, replacing the initials.     |
+| `onBackgroundImageError` | A callback for handling errors when loading the background image.         |
+| `onForegroundImageError` | A callback for handling errors when loading the foreground image.         |
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have a feature request, bug report, or want to contribute to the code, please feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/Evgenii-Zinner/ez-circle-avatar).
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

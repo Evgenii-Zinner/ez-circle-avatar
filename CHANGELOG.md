@@ -1,3 +1,9 @@
+## 0.0.5
+
+* **Docs:** Added `FUNDING.yml` and updated `pubspec.yaml` metadata.
+* **Docs:** Refined `README.md` for better clarity and SEO.
+* **Example:** Restructured example app for better pub.dev compatibility.
+
 ## 0.0.4
 
 * **Feature:** Added automatic contrasting foreground color for better readability.

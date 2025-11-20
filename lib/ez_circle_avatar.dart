@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-/// A widget that displays a circular avatar with initials or an icon.
+/// A widget that displays a circular avatar with initials, an icon, or an image.
 ///
-/// The avatar can display initials derived from a name, a custom child,
-/// a background image, or a foreground image. It also supports custom
-/// background and foreground colors, as well as custom radius.
+/// Features:
+/// *   **Consistent Coloring:** Generates a deterministic background color based on the [name].
+/// *   **Initials Extraction:** Automatically extracts initials from the [name] (e.g., "John Doe" -> "JD").
+/// *   **Contrast Control:** Ensures the foreground text is readable against the background.
+/// *   **Image Support:** Supports [backgroundImage] and [foregroundImage] with graceful fallback to initials.
+/// *   **Customization:** Allows overriding colors, radius, and child widgets.
 class EzCircleAvatar extends StatelessWidget {
   const EzCircleAvatar({
     super.key,
